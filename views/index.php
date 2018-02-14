@@ -20,7 +20,7 @@ $context = $this->context;
 	<?php endif; ?>
 	<?= $context->text ?>
 	<?= Html::dropDownList(
-		'gridPageSize', \Yii::$app->request->cookies->getValue($context->paramName, 20),
+		'gridPageSize', \Yii::$app->request->cookies->getValue($context->paramName, $context->defaultPageSize),
 		$this->context->dropDownOptions,
 		['class'=>'form-control input-sm']
 	) ?>

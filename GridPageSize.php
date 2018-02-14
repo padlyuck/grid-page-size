@@ -75,6 +75,8 @@ class GridPageSize extends Widget
 
 	public $paramName = '_grid_page_size';
 
+	public $defaultPageSize = 20;
+
 	/**
 	 * Multilingual support
 	 */
