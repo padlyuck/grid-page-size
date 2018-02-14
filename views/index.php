@@ -8,6 +8,7 @@ use webvimark\extensions\GridPageSize\GridPageSize;
 use yii\helpers\Html;
 use yii\web\View;
 
+/** @var GridPageSize $context */
 $context = $this->context;
 ?>
 <div class="form-inline pull-right">
@@ -19,7 +20,7 @@ $context = $this->context;
 	<?php endif; ?>
 	<?= $context->text ?>
 	<?= Html::dropDownList(
-		'grid-page-size', \Yii::$app->request->cookies->getValue('_grid_page_size', 20),
+		'gridPageSize', \Yii::$app->request->cookies->getValue($context->paramName, 20),
 		$this->context->dropDownOptions,
 		['class'=>'form-control input-sm']
 	) ?>

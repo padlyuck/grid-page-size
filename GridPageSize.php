@@ -1,11 +1,11 @@
 <?php
 namespace webvimark\extensions\GridPageSize;
 
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
-use Yii;
 
 class GridPageSize extends Widget
 {
@@ -72,6 +72,8 @@ class GridPageSize extends Widget
 	public $clientOptions;
 
 	public $clearFilterDisabledClass = 'hidden';
+
+	public $paramName = '_grid_page_size';
 
 	/**
 	 * Multilingual support
@@ -150,6 +152,9 @@ class GridPageSize extends Widget
 		{
 			$this->url = Url::to(['grid-page-size']);
 		}
+		if(is_array($this->url)){
+            $this->url = Url::to($this->url);
+        }
 	}
 
 	protected function guessGridId()
@@ -168,9 +173,9 @@ class GridPageSize extends Widget
 		}
 		$options = json_encode($options);
 		$js = <<<JS
-			$('$this->domContainer').off('change', '[name="grid-page-size"]').on('change', '[name="grid-page-size"]', function () {
+			$('$this->domContainer').off('change', '[name="gridPageSize"]').on('change', '[name="gridPageSize"]', function () {
 				var _t = $(this);
-				$.post('$this->url', { 'grid-page-size': _t.val() })
+				$.post('$this->url', { 'gridPageSize': _t.val() , 'paramName': '$this->paramName'})
 					.done(function(){
 						$.pjax.reload($options);
 					});
